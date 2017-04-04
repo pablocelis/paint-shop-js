@@ -1,0 +1,23 @@
+{
+  "name": "paint-shop-js",
+  "version": "1.0.0",
+  "description": "PaintShop factory will calculate if it is possible to satisfy the given costumers for their paint requests",
+  "main": "index.js",
+  "engines": {
+    "node": ">=6.5.0",
+    "npm": "^3.0.0"
+  },
+  "scripts": {
+    "test": "true",
+    "start": "node index.js",
+    "lint": "eslint generators parser index.js"
+  },
+  "author": "Pablo Martinez",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-airbnb-base": "^11.1.2",
+    "eslint-plugin-import": "^2.2.0"
+  }
+}
