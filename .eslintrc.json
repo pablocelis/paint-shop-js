@@ -1,0 +1,15 @@
+{
+    "extends": "airbnb-base",
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+        "indent" : ["error", 4],
+        "quotes" : ["error", "double"],
+        "no-console" : ["error", { "allow" : ["log"] }],
+        "comma-dangle" : ["error", "never"],
+        "no-plusplus" : 0,
+        "no-continue" : 0,
+        "object-curly-spacing" : [2, "always"]
+    }
+}
