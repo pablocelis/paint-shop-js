@@ -10,7 +10,7 @@
   "scripts": {
     "test": "true",
     "start": "node index.js",
-    "lint": "eslint generators parser index.js"
+    "lint": "eslint src index.js"
   },
   "author": "Pablo Martinez",
   "license": "ISC",
@@ -19,5 +19,10 @@
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-plugin-import": "^2.2.0"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "lodash": "^4.17.4",
+    "path": "^0.12.7"
   }
 }
