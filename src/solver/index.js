@@ -5,7 +5,6 @@ const solver = (customers, colorCount) => {
 
     const calculateCustomerPaint = (customer, paintCandidates = []) => {
         const paintOrders = customer.length;
-        console.log("calculateCustomerPaint::paintOrders", paintOrders);
 
         for (let i = 0; i < paintOrders; i++) {
             const paint = customer[i];
@@ -14,13 +13,11 @@ const solver = (customers, colorCount) => {
 
             // Customer only has ordered one paint
             if (paintOrders === 1) {
-                // console.log("calculateCustomerPaint::locked", lockedType, type);
                 // The paint type is not taken or other customer took the same type
                 if (isNil(lockedType) || lockedType === type) {
                     return paint;
                 }
             } else if (!lockedType) {
-                // console.log("calculateCustomerPaint::AddCantidate", paint);
                 // If color is not locked add it to candidates
                 paintCandidates.push(paint);
             } else if (lockedType === type) {
@@ -47,13 +44,14 @@ const solver = (customers, colorCount) => {
     };
 
     return () => {
+        customers.sort();   // Sort customers by number of paints ordered, only one paint first
+
         const numCustomers = customers.length;
 
         for (let i = 0; i < numCustomers; i++) {
             if (customers[i].length === 1) {
                 // If customer has only one paint resolve the only solution
                 const paint = calculateCustomerPaint(customers[i]);
-                console.log("Paint", paint, customers[i]);
                 if (!paint) {
                     throw new Error("No solution");
                 }
@@ -74,7 +72,6 @@ const solver = (customers, colorCount) => {
                 // Select one paint for the customer and try to search if he would accept
                 // a gloss (0) paint in his candidates, if not give him the first
                 let selectedPaint = paintCandidates[0];
-                console.log("selectedPaint", selectedPaint);
                 const paintCandidatesCount = paintCandidates.length;
 
                 for (let p = 0; p < paintCandidatesCount; p++) {
@@ -82,8 +79,6 @@ const solver = (customers, colorCount) => {
                         selectedPaint = paintCandidates[p];
                     }
                 }
-                console.log("selectedPaint::final", selectedPaint);
-
                 lockedColorMap.set(selectedPaint.color, selectedPaint.type);
             }
         }

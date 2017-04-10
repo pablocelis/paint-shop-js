@@ -1,19 +1,9 @@
 const fs = require("fs");
-const path = require("path");
 
 const parser = (file) => {
-    const rootDirectory = "./";
-
     const importFile = () => {
-        // Security: Avoid that user input get outside the project root
-        const filename = path.join(rootDirectory, file);
-        console.log("filename", filename);
-
-        if (filename.indexOf("\0") !== -1) {
-            throw new Error("That is evil HACKERMAN!!!");
-        }
         try {
-            return fs.readFileSync(filename, "utf8");
+            return fs.readFileSync(file, "utf8");
         } catch (err) {
             console.log("error", err.stack);
         }
@@ -27,16 +17,15 @@ const parser = (file) => {
         indexPointer++; // move the pointer to customer count position
         const customerCount = parseInt(array[indexPointer], 10);
         const customerArray = [];
-        console.log("paintCount", paintCount);
-        console.log("customerCount", customerCount);
         indexPointer++; // move the pointer to order position
 
         let i;
 
         for (i = 0; i < customerCount; i++) {
-            console.log("Array index", indexPointer, i);
+            // transform string customer into an array of strings
             const customerRawArray = array[i + indexPointer].split(" ");
-            console.log("customerRaw", customerRawArray);
+
+            // deconstruct orderCount and orders from main array
             const [orderCount, ...orders] = customerRawArray;
             const customer = [];
 
@@ -49,7 +38,6 @@ const parser = (file) => {
                     type: parseInt(orders[j + 1], 10)
                 });
             }
-            console.log("customerProcessed", customer);
             customerArray.push(customer);
         }
         return {
@@ -66,7 +54,6 @@ const parser = (file) => {
 
         const dataParsed = [];
         const linesArray = dataImported.toString().split("\n");
-        console.log("linesArray", linesArray);
 
         const [testCount, ...restArray] = linesArray;
         let indexPointer = 0;   // This hold the pointer to the begining of each test in the array
@@ -74,7 +61,6 @@ const parser = (file) => {
         for (let i = 0; i < testCount; i++) {
             const { test, indexPointer: newPointer } = parseTestInput(indexPointer, restArray);
             indexPointer = newPointer;
-            console.log("Test %s parsed", i, test, indexPointer);
             dataParsed.push(test);
         }
         return dataParsed;
